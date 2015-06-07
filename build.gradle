@@ -1,0 +1,30 @@
+if (System.getProperty("http.proxyUser") != null) {
+    Authenticator.setDefault(new Authenticator() {
+        public PasswordAuthentication getPasswordAuthentication() {
+            return new PasswordAuthentication(
+                    System.getProperty("http.proxyUser"), System.getProperty("http.proxyPassword").toCharArray());
+        }
+    });
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.sourcemuse.gradle.plugin:gradle-mongo-plugin:0.7.0'
+    }
+}
+
+apply plugin: 'mongo'
+apply plugin: 'java'
+
+sourceCompatibility = 1.1
+version = '1.0'
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Quickstart',
+                'Implementation-Version': version
+    }
+}
