@@ -38,14 +38,43 @@ dependencies {
     //compile 'org.springframework.data:spring-data-mongodb-parent:1.7.0.RELEASE'
     //compile 'org.mongodb:mongo-java-driver:3.0.1'
 
-
     // test
     testCompile 'junit:junit:4.12'
 }
 
 jar {
     manifest {
-        attributes 'Implementation-Title': 'Gradle Quickstart',
-                'Implementation-Version': version
+        attributes 'Implementation-Title': 'vex-git',
+                   'Implementation-Version': version
     }
 }
+
+test {
+    systemProperty 'user.timezone', 'UTC'
+    scanForTestClasses false
+    testLogging {
+        exceptionFormat 'full'
+        events "passed", "skipped", "failed"
+        //showStandardStreams true
+    }
+
+    include '**/*Test*'
+    outputs.upToDateWhen { false }
+}
+
+task integrationTest(type: Test) {
+    systemProperty 'user.timezone', 'UTC'
+    scanForTestClasses false
+    testLogging {
+        exceptionFormat 'full'
+        events "passed", "skipped", "failed"
+        showStandardStreams true
+    }
+
+    include '**/*IT*'
+    outputs.upToDateWhen { false }
+}
+
+check.dependsOn integrationTest
+integrationTest.mustRunAfter test
+integrationTest.dependsOn startManagedMongoDb

@@ -24,8 +24,14 @@ public class CustomerRepositoryIT {
 
     @Test
     public void shouldPersistNewCustomer() {
+
+
+        Customer c = new Customer();
+
         logger.info("running test with repo {}", customerRepository);
         logger.info("repo count before. count={}", customerRepository.count());
+        customerRepository.save(c);
+        logger.info("repo count after. count={}", customerRepository.count());
     }
 
 }
