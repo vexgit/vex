@@ -10,6 +10,7 @@ public class Customer {
 
     private String firstName;
     private String lastName;
+    private String attribute1;
 
     public Customer() {}
 
@@ -25,4 +26,15 @@ public class Customer {
                 id, firstName, lastName);
     }
 
+    public String getAttribute1() {
+        return attribute1;
+    }
+
+    public void setAttribute1(String attribute1) {
+        this.attribute1 = attribute1;
+    }
+
+    public String getId() {
+        return id;
+    }
 }

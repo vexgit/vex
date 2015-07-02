@@ -25,13 +25,20 @@ public class CustomerRepositoryIT {
     @Test
     public void shouldPersistNewCustomer() {
 
-
         Customer c = new Customer();
 
         logger.info("running test with repo {}", customerRepository);
-        logger.info("repo count before. count={}", customerRepository.count());
+        logger.info("repo count before. count={}, c={}", customerRepository.count(), c.getId());
+        c.setAttribute1("a2");
         customerRepository.save(c);
-        logger.info("repo count after. count={}", customerRepository.count());
+        logger.info("repo count after. count={}, c={}", customerRepository.count(), c.getId());
+
+        c = customerRepository.findOne(c.getId());
+
+        c.setAttribute1("a2");
+        customerRepository.save(c);
+        logger.info("repo count after. count={}, c={}", customerRepository.count(), c.getId());
+
     }
 
 }
