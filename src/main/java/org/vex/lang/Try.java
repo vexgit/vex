@@ -13,5 +13,8 @@ public interface Try {
     static FatalException fatal(Exception e) {
         return new FatalException(e);
     }
+    static FatalException fatal(String message, Object ... args) {
+        return new FatalException(message, args);
+    }
 
 }
